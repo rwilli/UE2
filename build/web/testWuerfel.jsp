@@ -15,6 +15,10 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <%= wuerfel.wuerfeln() %>
+        <% wuerfel.wuerfeln(); %>
+        <img name="wuerfel" 
+             title="<%= wuerfel.getTitle() %>" 
+             src="<%= wuerfel.getImage() %>" 
+             alt="<%= wuerfel.getAlt() %>"/>
     </body>
 </html>
