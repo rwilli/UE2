@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.GameInformation;
+import model.Player;
 
 /**
  *
@@ -19,11 +20,21 @@ import model.GameInformation;
  */
 public class GameServlet extends HttpServlet {
     private GameInformation info;
+    private Player pl1, pl2;
 
     @Override
     public void init() throws ServletException {
         super.init();
         info = new GameInformation();
+        
+        pl1 = new Player();
+        pl1.setName("Super Mario");
+        
+        pl2 = new Player();
+        pl2.setName("Computer");
+        
+        info.addPlayer("Spieler 1", pl1);
+        info.addPlayer("Spieler 2", pl2);
     }
     
     /**

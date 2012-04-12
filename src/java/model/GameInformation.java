@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,21 +13,23 @@ import java.util.List;
  * @author rainer
  */
 public class GameInformation {
-    private List<Player> players = new ArrayList<Player>();
+    private HashMap<String, Player> players = new HashMap<String, Player>();
     
     public GameInformation() {
         
     }
     
     public List<Player> getPlayers() {
-        return this.players;
+        return new ArrayList<Player>(players.values());
     }
     
     public int getNumberOfPlayers() {
         return this.players.size();
     }
     
-    public void addPlayer(Player player) {
-        this.players.add(player);
+    public void addPlayer(String id, Player player) {
+        if(!players.containsKey(id)) {
+            players.put(id, player);
+        }
     }
 }
