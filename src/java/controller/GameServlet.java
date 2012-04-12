@@ -6,17 +6,26 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.GameInformation;
 
 /**
  *
  * @author rainer
  */
 public class GameServlet extends HttpServlet {
+    private GameInformation info;
 
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        info = new GameInformation();
+    }
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -60,8 +69,10 @@ public class GameServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {        
+        //processRequest(request, response);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**

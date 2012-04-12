@@ -11,7 +11,11 @@
 		<meta name="keywords" content="Spiel EWA Mensch &auml;rgere Dich nicht"/>
 		<meta name="language" content="de-AT"/>
 		<link rel="stylesheet" type="text/css" href="styles/screen.css"/>
-                                    
+                <script type="text/javascript">
+                    function wuerfeln() {
+                        document.location.href = "GameServlet?param1=123&param2=abc"; 
+                    }
+                </script>                            
 	</head>
 	<body>
 		<div id="wrapper">
@@ -92,7 +96,7 @@
 					<hr class="accessibility" />
 					<h2 class="accessibility">W&uuml;rfel</h2>
 					<span title='aktueller Spieler'>Super Mario</span>
-                                        <img name="wuerfel" title="W&uuml;rfel Zahl 1" src="img/wuerfel1.png" alt="W&uuml;rfel Zahl 1" onclick="alert('Würfeln');")"/>
+                                        <img name="wuerfel" title="W&uuml;rfel Zahl 1" src="img/wuerfel1.png" alt="W&uuml;rfel Zahl 1" onclick="wuerfeln();")"/>
 				</div>
 				<div id="play_area">
 					<hr class="accessibility" />

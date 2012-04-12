@@ -1,8 +1,15 @@
+<%-- 
+    Document   : table
+    Created on : 12.04.2012, 15:29:50
+    Author     : rainer
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-
+<jsp:useBean id="wuerfel" class="model.Wuerfel" scope="session"/> 
+<jsp:setProperty name="wuerfel" property="*"/>
 <html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="de" lang="de">
 	<head>
 		<title>EWA Mensch &auml;rgere Dich nicht :: Spiel 1</title>
@@ -11,11 +18,19 @@
 		<meta name="keywords" content="Spiel EWA Mensch &auml;rgere Dich nicht"/>
 		<meta name="language" content="de-AT"/>
 		<link rel="stylesheet" type="text/css" href="styles/screen.css"/>
-                <script type="text/javascript">
-                    function wuerfeln() {
-                        document.location.href = "GameServlet?param1=123&param2=abc"; 
-                    }
-                </script>                            
+        <script language="javascript">
+
+<!-- JavaScript Code fuer Browser, die kein Scripting unterstuetzen ausblenden
+
+
+// JavaScript Funktion zum Anzeigen des Textes
+function showText()
+{
+  alert("Text: " + jsText);
+}
+
+// Ende der JavaScript Sektion -->
+</script>                            
 	</head>
 	<body>
 		<div id="wrapper">
@@ -41,7 +56,9 @@
 				</div>
 				<hr class="accessibility" />				
 				<div id="info_area">
-					<h2>Spielinformationen</h2>
+                                        <!-- TODO Place Restart Button -->
+                                        <input type="submit" value="Restart Game" accesskey="r"/>
+                                        <h2>Spielinformationen</h2>
 					<table class="game_info" summary="Diese Tabelle zeigt Informationen zum aktuellen Spiel">
 						<tbody>
 							<tr class="accessibility">
@@ -96,7 +113,13 @@
 					<hr class="accessibility" />
 					<h2 class="accessibility">W&uuml;rfel</h2>
 					<span title='aktueller Spieler'>Super Mario</span>
-                                        <img name="wuerfel" title="W&uuml;rfel Zahl 1" src="img/wuerfel1.png" alt="W&uuml;rfel Zahl 1" onclick="wuerfeln();")"/>
+                                        <% wuerfel.wuerfeln(); %>
+                                        <img name="wuerfel" 
+                                            title="<%= wuerfel.getTitle() %>" 
+                                            src="<%= wuerfel.getImage() %>" 
+                                            alt="<%= wuerfel.getAlt() %>"
+                                            onclick="alert('Hallo')"/>
+                                        <!--<img name="wuerfel" title="W&uuml;rfel Zahl 1" src="img/wuerfel1.png" alt="W&uuml;rfel Zahl 1" onclick="alert('Würfeln');")"/>-->
 				</div>
 				<div id="play_area">
 					<hr class="accessibility" />
@@ -207,4 +230,4 @@
 			</div>
         </div>
     </body>
-</html>                           
+</html>                      
