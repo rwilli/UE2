@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.GameInformation;
 import model.Player;
 
@@ -26,6 +27,8 @@ public class GameServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         info = new GameInformation();
+        
+        info.incrementRound();
         
         pl1 = new Player();
         pl1.setName("Super Mario");
@@ -82,8 +85,16 @@ public class GameServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         //processRequest(request, response);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
-        dispatcher.forward(request, response);
+        HttpSession session = request.getSession(true);
+            //User user = userpool.getUser(request.getParameter("username"), request.getParameter("password"));
+            //if(user == null) {
+            //    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/loginfail.html");
+            //    dispatcher.forward(request, response);
+            //} else {
+                session.setAttribute("gameInfo", info);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
+                dispatcher.forward(request, response);
+        
     }
 
     /**
@@ -99,6 +110,8 @@ public class GameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        //TODO
+        // 
     }
 
     /**

@@ -14,13 +14,22 @@ import java.util.List;
  */
 public class GameInformation {
     private HashMap<String, Player> players = new HashMap<String, Player>();
+    //private List<Field> fields = new ArrayList<Field>();
+    private int round = 0;
+    private long start = 0;
+    private int sec = 0;
+    private int min = 0;
     
     public GameInformation() {
-        
+        start = System.currentTimeMillis();
     }
     
     public List<Player> getPlayers() {
         return new ArrayList<Player>(players.values());
+    }
+    
+    public String getPlayerById(String str) {
+        return this.players.get(str).getName();
     }
     
     public int getNumberOfPlayers() {
@@ -31,5 +40,27 @@ public class GameInformation {
         if(!players.containsKey(id)) {
             players.put(id, player);
         }
+    }
+    
+    //TODO place fields
+    
+    public void incrementRound() {
+        this.round++;
+    }
+    
+    public int getRound() {
+        return this.round;
+    }
+    
+    public String getTime() {
+        String str = "";
+        
+        sec = (int) ((System.currentTimeMillis() - start) / 1000);
+        
+        //TODO implement min and sec overflow
+        
+        str += this.min + " min, " + this.sec + " sec";
+        
+        return str;
     }
 }

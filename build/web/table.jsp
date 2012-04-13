@@ -8,8 +8,8 @@
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<jsp:useBean id="wuerfel" class="model.Wuerfel" scope="session"/> 
-<jsp:setProperty name="wuerfel" property="*"/>
+<jsp:useBean id="gameInfo" class="model.GameInformation" scope="session"/> 
+<jsp:setProperty name="gameInfo" property="*"/>
 <html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="de" lang="de">
 	<head>
 		<title>EWA Mensch &auml;rgere Dich nicht :: Spiel 1</title>
@@ -67,7 +67,7 @@ function showText()
 							</tr>
 							<tr>
 								<th>Anzahl Spieler</th>
-								<td>2</td>
+								<td><%= gameInfo.getNumberOfPlayers() %></td>
 							</tr>
 							<tr>
 								<th>F&uuml;hrender</th>
@@ -75,11 +75,11 @@ function showText()
 							</tr>
 							<tr>
 								<th>Aktuelle Runde</th>
-								<td>1</td>
+								<td><%= gameInfo.getRound() %></td>
 							</tr>
 							<tr>
 								<th>Zeit</th>
-								<td>0 min, 0 sec</td>
+								<td><%= gameInfo.getTime() %></td><!--0 min, 0 sec</td>-->
 							</tr>
 						</tbody>
 					</table>
@@ -92,19 +92,11 @@ function showText()
 							</tr>
 							<tr>
 								<th>Spieler 1</th>
-								<td>Super Mario</td>
+								<td><%= gameInfo.getPlayerById("Spieler 1") %></td>
 							</tr>
 							<tr>
 								<th>Spieler 2</th>
-								<td>Bowser</td>
-							</tr>
-							<tr>
-								<th>Spieler 3</th>
-								<td>Luigi</td>
-							</tr>
-							<tr>
-								<th>Spieler 4</th>
-								<td>Yoshi</td>
+								<td><%= gameInfo.getPlayerById("Spieler 2") %></td>
 							</tr>
 						</tbody>
 					</table>
@@ -113,13 +105,7 @@ function showText()
 					<hr class="accessibility" />
 					<h2 class="accessibility">W&uuml;rfel</h2>
 					<span title='aktueller Spieler'>Super Mario</span>
-                                        <% wuerfel.wuerfeln(); %>
-                                        <img name="wuerfel" 
-                                            title="<%= wuerfel.getTitle() %>" 
-                                            src="<%= wuerfel.getImage() %>" 
-                                            alt="<%= wuerfel.getAlt() %>"
-                                            onclick="alert('Hallo')"/>
-                                        <!--<img name="wuerfel" title="W&uuml;rfel Zahl 1" src="img/wuerfel1.png" alt="W&uuml;rfel Zahl 1" onclick="alert('Würfeln');")"/>-->
+                                        <img name="wuerfel" title="W&uuml;rfel Zahl 1" src="img/wuerfel1.png" alt="W&uuml;rfel Zahl 1" onclick="alert('Würfeln');"/>
 				</div>
 				<div id="play_area">
 					<hr class="accessibility" />

@@ -15,7 +15,6 @@ public class Player {
     private String alt = "";
     private int actPosition = 0;
     
-    
     public Player() {
         
     }
