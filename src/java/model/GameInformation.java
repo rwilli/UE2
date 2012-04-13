@@ -19,6 +19,7 @@ public class GameInformation {
     private long start = 0;
     private int sec = 0;
     private int min = 0;
+    private String wuerfelImg = "";
     
     public GameInformation() {
         start = System.currentTimeMillis();
@@ -62,5 +63,14 @@ public class GameInformation {
         str += this.min + " min, " + this.sec + " sec";
         
         return str;
+    }
+    
+    //dirty :D
+    public void setWuerfelImg(String str) {
+        this.wuerfelImg = str;
+    }
+    
+    public String getWuerfelImg() {
+        return this.wuerfelImg;
     }
 }

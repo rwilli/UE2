@@ -14,30 +14,35 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.GameInformation;
 import model.Player;
+import model.Wuerfel;
 
 /**
  *
  * @author rainer
  */
 public class GameServlet extends HttpServlet {
-    private GameInformation info;
+    private GameInformation gameInfo;
     private Player pl1, pl2;
+    private Wuerfel wuerfel;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        info = new GameInformation();
+        gameInfo = new GameInformation();
+        wuerfel = new Wuerfel();
         
-        info.incrementRound();
+        gameInfo.incrementRound();
         
         pl1 = new Player();
         pl1.setName("Super Mario");
+        pl1.setActPosition(43);
         
         pl2 = new Player();
         pl2.setName("Computer");
+        pl2.setActPosition(45);
         
-        info.addPlayer("Spieler 1", pl1);
-        info.addPlayer("Spieler 2", pl2);
+        gameInfo.addPlayer("Spieler 1", pl1);
+        gameInfo.addPlayer("Spieler 2", pl2);
     }
     
     /**
@@ -85,16 +90,22 @@ public class GameServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         //processRequest(request, response);
-        HttpSession session = request.getSession(true);
-            //User user = userpool.getUser(request.getParameter("username"), request.getParameter("password"));
-            //if(user == null) {
-            //    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/loginfail.html");
-            //    dispatcher.forward(request, response);
-            //} else {
-                session.setAttribute("gameInfo", info);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
-                dispatcher.forward(request, response);
+        String action = request.getParameter("action");
         
+        if (action == null) {
+            return;
+        }
+        
+        if (action.equals("wuerfeln")) {                           
+            HttpSession session = request.getSession(true);
+            this.wuerfel.wuerfeln();
+            this.gameInfo.setWuerfelImg(this.wuerfel.getImage());
+        }
+        HttpSession session = request.getSession(true);
+        this.gameInfo.incrementRound();
+        session.setAttribute("gameInfo", gameInfo);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**

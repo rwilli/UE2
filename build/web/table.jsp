@@ -24,9 +24,9 @@
 
 
 // JavaScript Funktion zum Anzeigen des Textes
-function showText()
+function callServlet()
 {
-  alert("Text: " + jsText);
+  document.location.href = "GameServlet?action=wuerfeln"; 
 }
 
 // Ende der JavaScript Sektion -->
@@ -105,7 +105,7 @@ function showText()
 					<hr class="accessibility" />
 					<h2 class="accessibility">W&uuml;rfel</h2>
 					<span title='aktueller Spieler'>Super Mario</span>
-                                        <img name="wuerfel" title="W&uuml;rfel Zahl 1" src="img/wuerfel1.png" alt="W&uuml;rfel Zahl 1" onclick="alert('Würfeln');"/>
+                                        <img name="wuerfel" title="W&uuml;rfel Zahl 1" src="<%= gameInfo.getWuerfelImg() %>" alt="W&uuml;rfel Zahl 1" onclick="callServlet()"/>
 				</div>
 				<div id="play_area">
 					<hr class="accessibility" />
