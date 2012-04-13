@@ -14,9 +14,10 @@ public class Player {
     private String title = "";
     private String alt = "";
     private int actPosition = 0;
+    private Wuerfel wuerfel;
     
     public Player() {
-        
+        wuerfel = new Wuerfel();
     }
     
     public void setName(String name) {
@@ -57,5 +58,13 @@ public class Player {
     
     public int getActPosition() {
         return this.actPosition;
+    }
+    
+    public Wuerfel getWuerfel() {
+        return this.wuerfel;
+    }
+    
+    public void wuerfel() {
+        this.wuerfel.wuerfeln();
     }
 }

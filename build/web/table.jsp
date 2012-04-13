@@ -10,6 +10,8 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <jsp:useBean id="gameInfo" class="model.GameInformation" scope="session"/> 
 <jsp:setProperty name="gameInfo" property="*"/>
+<jsp:useBean id="wuerfel" class="model.Wuerfel" scope="session"/>
+<jsp:setProperty name="wuerfel" property="*"/>
 <html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="de" lang="de">
 	<head>
 		<title>EWA Mensch &auml;rgere Dich nicht :: Spiel 1</title>
@@ -105,7 +107,7 @@ function callServlet()
 					<hr class="accessibility" />
 					<h2 class="accessibility">W&uuml;rfel</h2>
 					<span title='aktueller Spieler'>Super Mario</span>
-                                        <img name="wuerfel" title="W&uuml;rfel Zahl 1" src="<%= gameInfo.getWuerfelImg() %>" alt="W&uuml;rfel Zahl 1" onclick="callServlet()"/>
+                                        <img name="wuerfel" title="<%= wuerfel.getTitle() %>" src="<%= wuerfel.getImage() %>" alt="<%= wuerfel.getAlt() %>" onclick="callServlet()"/>
 				</div>
 				<div id="play_area">
 					<hr class="accessibility" />
@@ -207,7 +209,7 @@ function callServlet()
 							</ol>
 						</div>
 						<div class="clearer"></div>  
-						<div id="infogegner">W&uuml;rfelergebnis Computer: 3</div>
+						<div id="infogegner">W&uuml;rfelergebnis Computer: <%= gameInfo.getCubeComputer() %></div>
 					</div>
 				</div>				
 			</div>

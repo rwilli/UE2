@@ -14,12 +14,11 @@ import java.util.List;
  */
 public class GameInformation {
     private HashMap<String, Player> players = new HashMap<String, Player>();
-    //private List<Field> fields = new ArrayList<Field>();
     private int round = 0;
     private long start = 0;
     private int sec = 0;
     private int min = 0;
-    private String wuerfelImg = "";
+    private int cubeComputer = 0;
     
     public GameInformation() {
         start = System.currentTimeMillis();
@@ -43,8 +42,6 @@ public class GameInformation {
         }
     }
     
-    //TODO place fields
-    
     public void incrementRound() {
         this.round++;
     }
@@ -65,12 +62,11 @@ public class GameInformation {
         return str;
     }
     
-    //dirty :D
-    public void setWuerfelImg(String str) {
-        this.wuerfelImg = str;
+    public void setCubeComputer(int number) {
+        this.cubeComputer = number;
     }
     
-    public String getWuerfelImg() {
-        return this.wuerfelImg;
+    public int getCubeComputer() {
+        return this.cubeComputer;
     }
 }

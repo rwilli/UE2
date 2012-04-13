@@ -45,6 +45,10 @@ public class Wuerfel {
         return this.alt;
     }
     
+    public int getNumber() {
+        return this.rndNumber;
+    }
+    
     public void wuerfeln() {
         rndNumber = generator.nextInt(6) + 1;
         
