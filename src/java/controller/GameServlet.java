@@ -125,11 +125,15 @@ public class GameServlet extends HttpServlet {
                 wuerfeln(this.pl2);
                 
                 // computer got a 6
-                if (this.pl2.getWuerfel().getNumber() == 6) {
-                    wuerfeln(this.pl2);
-                    this.computerCube += 6 + "-";
-                    computerCube += pl2.getWuerfel().getNumber();
-                    gameInfo.setCubeComputer(computerCube);
+                 if (this.pl2.getWuerfel().getNumber() == 6) {
+                    
+                    this.computerCube = "6";
+                    
+                    while (this.pl2.getWuerfel().getNumber() == 6) {
+                        wuerfeln(this.pl2);
+                        computerCube += " - " + pl2.getWuerfel().getNumber();
+                        gameInfo.setCubeComputer(computerCube);
+                    }
                     session.setAttribute("gameInfo", gameInfo);
             
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
