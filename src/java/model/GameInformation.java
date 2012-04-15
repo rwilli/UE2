@@ -18,7 +18,7 @@ public class GameInformation {
     private long start = 0;
     private int sec = 0;
     private int min = 0;
-    private int cubeComputer = 0;
+    private String cubeComputer = "";
     
     public GameInformation() {
         players = new HashMap<String, Player>();
@@ -68,11 +68,11 @@ public class GameInformation {
         return str;
     }
     
-    public void setCubeComputer(int number) {
+    public void setCubeComputer(String number) {
         this.cubeComputer = number;
     }
     
-    public int getCubeComputer() {
+    public String getCubeComputer() {
         return this.cubeComputer;
     }
 }

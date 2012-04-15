@@ -30,6 +30,7 @@ public class GameServlet extends HttpServlet {
     private Wuerfel wuerfel;
     private List<Field> fields;
     private Random generator = null;
+    private String computerCube = "";
 
     @Override
     public void init() throws ServletException {
@@ -115,6 +116,7 @@ public class GameServlet extends HttpServlet {
             // player got a 6
             if (this.pl1.getWuerfel().getNumber() == 6) {
                 // cube again
+                session.setAttribute("gameInfo", gameInfo);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
                 dispatcher.forward(request, response);
             } else {
@@ -122,14 +124,23 @@ public class GameServlet extends HttpServlet {
                 wuerfeln(this.pl2);
                 
                 // computer got a 6
-                if (this.pl2.getWuerfel().getNumber() == 6)
+                if (this.pl2.getWuerfel().getNumber() == 6) {
                     wuerfeln(this.pl2);
-                
-                gameInfo.setCubeComputer(pl2.getWuerfel().getNumber());
-                session.setAttribute("gameInfo", gameInfo);
+                    this.computerCube += 6 + "-";
+                    computerCube += pl2.getWuerfel().getNumber();
+                    gameInfo.setCubeComputer(computerCube);
+                    session.setAttribute("gameInfo", gameInfo);
             
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
-                dispatcher.forward(request, response);
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    computerCube = "";
+                    gameInfo.setCubeComputer(computerCube + pl2.getWuerfel().getNumber());
+                    session.setAttribute("gameInfo", gameInfo);
+            
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
+                    dispatcher.forward(request, response);
+                }
             }
         } else {
             
