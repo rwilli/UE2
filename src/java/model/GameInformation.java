@@ -60,6 +60,9 @@ public class GameInformation {
         
         sec = (int) ((System.currentTimeMillis() - start) / 1000);
         
+        min = sec / 60;
+        sec = sec % 60;
+        
         //TODO implement min and sec overflow
         
         str += this.min + " min, " + this.sec + " sec";
