@@ -13,7 +13,7 @@ import java.util.List;
  * @author rainer
  */
 public class GameInformation {
-    private HashMap<String, Player> players = new HashMap<String, Player>();
+    private HashMap<String, Player> players = null;
     private int round = 0;
     private long start = 0;
     private int sec = 0;
@@ -21,7 +21,12 @@ public class GameInformation {
     private int cubeComputer = 0;
     
     public GameInformation() {
+        players = new HashMap<String, Player>();
         start = System.currentTimeMillis();
+    }
+    
+    public void setPlayers(HashMap<String, Player> players) {
+        this.players = players;
     }
     
     public List<Player> getPlayers() {

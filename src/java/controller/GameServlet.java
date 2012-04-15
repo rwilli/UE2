@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +29,7 @@ public class GameServlet extends HttpServlet {
     private Player pl1, pl2;
     private Wuerfel wuerfel;
     private List<Field> fields;
+    private Random generator = null;
 
     @Override
     public void init() throws ServletException {
@@ -35,6 +37,7 @@ public class GameServlet extends HttpServlet {
         gameInfo = new GameInformation();
         wuerfel = new Wuerfel();
         fields = new ArrayList<Field>();
+        this.generator = new Random();
         
         pl1 = new Player();
         pl1.setName("Super Mario");
@@ -105,17 +108,24 @@ public class GameServlet extends HttpServlet {
             this.gameInfo.incrementRound();
             
             //player to cube
-            this.pl1.wuerfel();
+            wuerfeln(this.pl1);
             
             session.setAttribute("wuerfel", pl1.getWuerfel());
             
+            // player got a 6
+            //if (this.pl1.getWuerfel().getNumber() == 6) {
+            //    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            //    dispatcher.forward(request, response);
+            //} else {
+            
             //computer to cube
-            pl2.wuerfel();
+            wuerfeln(this.pl2);
             gameInfo.setCubeComputer(pl2.getWuerfel().getNumber());
             session.setAttribute("gameInfo", gameInfo);
             
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
             dispatcher.forward(request, response);
+            //}
         } else {
             
         }  
@@ -147,4 +157,40 @@ public class GameServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void wuerfeln(Player player) {
+        int number = generator.nextInt(6) + 1;
+        player.getWuerfel().setNumber(number);
+        
+        if (number == 1) {
+            player.getWuerfel().setTitle("W&uuml;rfel Zahl 1");
+            player.getWuerfel().setImage("img/wuerfel1.png");
+            player.getWuerfel().setAlt("W&uuml;rfel Zahl 1");
+        }
+        if (number == 2) {
+            player.getWuerfel().setTitle("W&uuml;rfel Zahl 2");
+            player.getWuerfel().setImage("img/wuerfel2.png");
+            player.getWuerfel().setAlt("W&uuml;rfel Zahl 2");
+        }
+        if (number == 3) {
+            player.getWuerfel().setTitle("W&uuml;rfel Zahl 3");
+            player.getWuerfel().setImage("img/wuerfel3.png");
+            player.getWuerfel().setAlt("W&uuml;rfel Zahl 3");
+        }
+        if (number == 4) {
+            player.getWuerfel().setTitle("W&uuml;rfel Zahl 4");
+            player.getWuerfel().setImage("img/wuerfel4.png");
+            player.getWuerfel().setAlt("W&uuml;rfel Zahl 4");
+        }
+        if (number == 5) {
+            player.getWuerfel().setTitle("W&uuml;rfel Zahl 5");
+            player.getWuerfel().setImage("img/wuerfel5.png");
+            player.getWuerfel().setAlt("W&uuml;rfel Zahl 5");
+        }
+        if (number == 6) {
+            player.getWuerfel().setTitle("W&uuml;rfel Zahl 6");
+            player.getWuerfel().setImage("img/wuerfel6.png");
+            player.getWuerfel().setAlt("W&uuml;rfel Zahl 6");
+        }
+    }
 }
