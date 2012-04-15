@@ -5,3 +5,4 @@ bin
 .metadata
 /dist/
 nbproject
+nbproject/private
