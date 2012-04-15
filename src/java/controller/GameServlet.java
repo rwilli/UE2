@@ -7,6 +7,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import javax.servlet.RequestDispatcher;
@@ -161,7 +162,57 @@ public class GameServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         //TODO
-        // 
+        // palce restart game here
+        /*
+         * Beispiel Code vom RegistrationMVC aus der LVA
+         * 
+         * HttpSession session = request.getSession(true);         
+        User user =(User)session.getAttribute("user");
+        boolean newuser = false;
+        if(user == null) {
+            user = new User();            
+            newuser = true;
+            user.setUsername(request.getParameter("username"));
+        } else {
+            user = userpool.getUser(user.getUsername());
+        }
+        user.setFirstname(request.getParameter("firstname"));
+        user.setLastname(request.getParameter("lastname"));        
+        user.setPassword(request.getParameter("password"));
+
+        String[] inter = request.getParameterValues("interests");
+        if(!newuser) {
+            user.clearInterests();
+        }
+        if(inter != null ) {
+            List<String> interests = Arrays.asList(inter);
+            if(interests.contains("webEngineering")) {
+                user.addInterest(Interest.WEBENINEERING);                
+            }
+            if(interests.contains("modelEngineering")) {
+                user.addInterest(Interest.MODELENGINEERING);                
+            }
+            if(interests.contains("semanticWeb")) {
+                user.addInterest(Interest.SEMANTICWEB);                
+            }
+            if(interests.contains("objectOrientedModeling")) {
+                user.addInterest(Interest.OBJECTORIENTEDMODELING);                
+            }
+            if(interests.contains("businessInformatics")) {
+                user.addInterest(Interest.BUSINESSINFORMATICS);                
+            }         
+        } 
+        
+        session.setAttribute("user", user);
+        
+        if(newuser) {
+            userpool.registerUser(user);
+        }           
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userpage.jsp");
+        dispatcher.forward(request, response);
+         * 
+         */
     }
 
     /**
