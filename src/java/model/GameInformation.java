@@ -63,8 +63,6 @@ public class GameInformation {
         min = sec / 60;
         sec = sec % 60;
         
-        //TODO implement min and sec overflow
-        
         str += this.min + " min, " + this.sec + " sec";
         
         return str;
