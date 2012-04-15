@@ -113,19 +113,24 @@ public class GameServlet extends HttpServlet {
             session.setAttribute("wuerfel", pl1.getWuerfel());
             
             // player got a 6
-            //if (this.pl1.getWuerfel().getNumber() == 6) {
-            //    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-            //    dispatcher.forward(request, response);
-            //} else {
+            if (this.pl1.getWuerfel().getNumber() == 6) {
+                // cube again
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                // computer to cube
+                wuerfeln(this.pl2);
+                
+                // computer got a 6
+                if (this.pl2.getWuerfel().getNumber() == 6)
+                    wuerfeln(this.pl2);
+                
+                gameInfo.setCubeComputer(pl2.getWuerfel().getNumber());
+                session.setAttribute("gameInfo", gameInfo);
             
-            //computer to cube
-            wuerfeln(this.pl2);
-            gameInfo.setCubeComputer(pl2.getWuerfel().getNumber());
-            session.setAttribute("gameInfo", gameInfo);
-            
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
-            dispatcher.forward(request, response);
-            //}
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
+                dispatcher.forward(request, response);
+            }
         } else {
             
         }  
