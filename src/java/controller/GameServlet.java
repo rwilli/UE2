@@ -6,10 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +26,7 @@ public class GameServlet extends HttpServlet {
     private GameInformation gameInfo;
     private Player pl1, pl2;
     private Wuerfel wuerfel;
-    private List<Field> fields;
+    private Map<Integer, Player> fields;
     private Random generator = null;
     private String computerCube = "";
 
@@ -38,7 +35,7 @@ public class GameServlet extends HttpServlet {
         super.init();
         gameInfo = new GameInformation();
         wuerfel = new Wuerfel();
-        fields = new ArrayList<Field>();
+        fields = new HashMap<Integer, Player>();
         this.generator = new Random();
         
         pl1 = new Player();
@@ -51,6 +48,14 @@ public class GameServlet extends HttpServlet {
         
         gameInfo.addPlayer("Spieler 1", pl1);
         gameInfo.addPlayer("Spieler 2", pl2);
+        
+        for (int i = 1; i <= 40; i++) {
+            new Field();
+            fields.put(i, null);
+        }
+        
+        fields.put(1, pl1);
+        
         
     }
     
@@ -263,5 +268,15 @@ public class GameServlet extends HttpServlet {
             player.getWuerfel().setImage("img/wuerfel6.png");
             player.getWuerfel().setAlt("W&uuml;rfel Zahl 6");
         }
+    }
+    
+    private int movePlayer(Player player, int currentPosition, int steps) {
+        
+        int newPosition = currentPosition + steps;
+        
+        fields.remove(currentPosition);
+        fields.put(newPosition, player);
+        
+        return newPosition;
     }
 }

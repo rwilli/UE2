@@ -33,8 +33,8 @@ public class GameInformation {
         return new ArrayList<Player>(players.values());
     }
     
-    public String getPlayerById(String str) {
-        return this.players.get(str).getName();
+    public Player getPlayerById(String str) {
+        return this.players.get(str);
     }
     
     public int getNumberOfPlayers() {

@@ -94,11 +94,11 @@ function callServlet()
 							</tr>
 							<tr>
 								<th>Spieler 1</th>
-								<td><%= gameInfo.getPlayerById("Spieler 1") %></td>
+								<td><%= gameInfo.getPlayerById("Spieler 1").getName() %></td>
 							</tr>
 							<tr>
 								<th>Spieler 2</th>
-								<td><%= gameInfo.getPlayerById("Spieler 2") %></td>
+								<td><%= gameInfo.getPlayerById("Spieler 2").getName() %></td>
 							</tr>
 						</tbody>
 					</table>
